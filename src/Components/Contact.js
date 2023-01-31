@@ -3,6 +3,7 @@ import "../styles/contact.css";
 import poster5 from "../Assets/poster5.jpg";
 import contact1 from "../Assets/contact1.gif";
 import { toast } from "react-hot-toast";
+import axios from "axios";
 
 function Contact() {
   const [name, setName] = useState("");
@@ -10,13 +11,29 @@ function Contact() {
   const [phone, setPhone] = useState(0);
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
+  const [isProcessed , setIsProcessed] = useState(false);
 
   const handleSubmit = (e) => {
 
     e.preventDefault();
-    console.log(`Your Data :  ${name} -- ${email} -- ${phone} -- ${subject} -- ${message} `);
+    // console.log(`Your Data :  ${name} -- ${email} -- ${phone} -- ${subject} -- ${message} `);
 
-    toast.success(`${name} Thanks for feedback!`);
+    const res = axios.post('http://localhost:4000/api/contact', {
+      name,
+      email,
+      phone,
+      subject,
+      message,
+      isProcessed
+    }).then((res) => {
+        console.log(res.data.createdData);
+        toast.success(`Thanks ${res.data.createdData.name}! for feedback`);
+    }).catch((err) => {
+      console.log(err.message);
+      toast.success("some error Occured at backend");
+    })
+
+    
   }
 
   return (

@@ -12,6 +12,7 @@ import { Toaster } from "react-hot-toast";
 import UserState from "./context/User/UserState.js";
 import CreateDonation from "./Components/CreateDonation.js";
 import Donate from "./Components/Donate.js";
+import Support from "./Components/Support.js";
 
 
 function App() {
@@ -56,6 +57,7 @@ function App() {
               <Route exact path="/login" element={<Login />}></Route>
               <Route exact path="/createDonation" element={<CreateDonation />}></Route>
               <Route exact path="/donate" element={<Donate />}></Route>
+              <Route exact path="/support" element={<Support />}></Route>
             </Routes>
           </Router>
 
