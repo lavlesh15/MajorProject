@@ -11,30 +11,30 @@ function Contact() {
   const [phone, setPhone] = useState(0);
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
-  const [isProcessed , setIsProcessed] = useState(false);
+  const [isProcessed, setIsProcessed] = useState(false);
 
   const handleSubmit = (e) => {
-
     e.preventDefault();
     // console.log(`Your Data :  ${name} -- ${email} -- ${phone} -- ${subject} -- ${message} `);
 
-    const res = axios.post('http://localhost:4000/api/contact', {
-      name,
-      email,
-      phone,
-      subject,
-      message,
-      isProcessed
-    }).then((res) => {
+    const res = axios
+      .post("http://localhost:4000/api/contact", {
+        name,
+        email,
+        phone,
+        subject,
+        message,
+        isProcessed,
+      })
+      .then((res) => {
         console.log(res.data.createdData);
         toast.success(`Thanks ${res.data.createdData.name}! for feedback`);
-    }).catch((err) => {
-      console.log(err.message);
-      toast.success("some error Occured at backend");
-    })
-
-    
-  }
+      })
+      .catch((err) => {
+        console.log(err.message);
+        toast.success("some error Occured at backend");
+      });
+  };
 
   return (
     <>

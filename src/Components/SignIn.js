@@ -4,6 +4,8 @@ import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useCookies } from "react-cookie";
+import { useContext } from "react";
+import UserContext from "../context/User/UserContext";
 
 function SignIn() {
   const navigate = useNavigate();
@@ -12,6 +14,8 @@ function SignIn() {
   const [contact, setContact] = useState(0);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role , setRole] = useState("");
+  const {user , getuser} = useContext(UserContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,6 +40,7 @@ function SignIn() {
       .then((res) => {
         setCookie("token", res.data.token);
         toast.success(`Hello ${res.data.createdUser.name}! Welcome`);
+        getuser();
         navigate("/");
         
       })
@@ -82,6 +87,8 @@ function SignIn() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
+
+              
 
               <button>Sign up</button>
 

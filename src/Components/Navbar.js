@@ -1,18 +1,37 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../App.css';
 import logo1 from '../Assets/logo1.png';
 import {useCookies} from 'react-cookie'
 import { useContext } from 'react';
 import UserContext from '../context/User/UserContext';
 import { toast } from 'react-hot-toast';
+import axios from 'axios';
+import { Navigate } from 'react-router-dom';
 
 function Navbar() {
 
   const [cookies , setCookies] = useCookies();
   const {user , getuser} = useContext(UserContext);
 
+  const handleLogout = async (e) => {
+   
+    const res = await axios
+      .get(`http://localhost:4000/api/logout`)
+      .then((res) => {
+        document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
+        toast.success(`Logged out`);
+      })
+      .catch((err) => {
+        toast.success(`Enter correct credentail`);
+        console.log(err);
+      });
+  }
+
   // useEffect(()=>{
-  //     getuser()
+  //     if(cookies.token)
+  //     {
+  //       getuser();
+  //     }
   // }, [cookies.token])
 
   return (
@@ -30,11 +49,11 @@ function Navbar() {
 
             <div className="navbar-sign">
 
-            {/* <p> {user.length !== 0 ? `hello ${user.name}!` : ''}</p> */}
+            <p> {cookies.token ? `hello ${user.name}!` : ''}</p>
 
             {cookies.token === undefined ?  
             <a href='/signin' className='sign-btn' > sign Up <i className="fa-solid fa-right-to-bracket"></i>  </a> : 
-            <a href='#' className='sign-btn' > Logout <i className="fa-solid fa-right-to-bracket"></i>  </a>
+            <a href='#' className='sign-btn' onClick={handleLogout} > Logout <i className="fa-solid fa-right-to-bracket"></i>  </a>
             }
             </div>
 

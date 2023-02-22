@@ -65,6 +65,24 @@
     cursor: pointer;
 }
 
+button a
+{
+    color:white;
+    text-decoration: none;
+}
+
+button a:hover
+{
+    color: #6674cc;
+}
+
+button:hover
+{
+    border: 1px solid #6674cc;
+    background-color: white;
+    color: #6674cc;
+}
+
 .landing-right
 {
     height: 100%;

@@ -1,11 +1,26 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import landing from "../Assets/landing3.jpg"
 import about from "../Assets/about.jpg"
 import "../styles/landing.css";
 import Feature from './Feature.js';
 import  toast ,{ Toaster } from 'react-hot-toast';
+import { useContext } from 'react';
+import UserContext from '../context/User/UserContext';
+import { Link } from "react-router-dom";
+import { useCookies } from 'react-cookie';
 
 function Landing() {
+
+  const [cookies , setCookies] = useCookies();
+//   const {user , getuser} = useContext(UserContext);
+
+//   useEffect(()=>{
+//     if(cookies.token)
+//     {
+//       getuser();
+//     }
+// }, [cookies.token])
+
   return (
 
     <>
@@ -20,7 +35,7 @@ function Landing() {
             </p>
 
             <div className="landing-btn">
-                <button>Donate</button> 
+                <button className="donate-btn"> <a href='/donate'> Donate </a></button> 
                 <button className='btn-more'>Know More</button>
             </div>
         </div>
