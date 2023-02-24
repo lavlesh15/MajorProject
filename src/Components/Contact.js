@@ -16,8 +16,11 @@ function Contact() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log(`Your Data :  ${name} -- ${email} -- ${phone} -- ${subject} -- ${message} `);
+    let loggeduser = JSON.parse( localStorage.getItem('user'))
 
-    const res = axios
+    if(loggeduser)
+    {
+      const res = axios
       .post("http://localhost:4000/api/contact", {
         name,
         email,
@@ -34,6 +37,13 @@ function Contact() {
         console.log(err.message);
         toast.success("some error Occured at backend");
       });
+
+    }
+    else
+    {
+      toast.success('Login to send message');
+    }
+    
   };
 
   return (

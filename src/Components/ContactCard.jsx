@@ -93,7 +93,7 @@ function ContactCard({ name, email, phone, subject, message, isProcessed }) {
                     name="message"
                     id="msg"
                     cols="50"
-                    rows="4"
+                    rows="8"
                     placeholder="Enter Your Reply..."
                     onChange={(e) => {
                       setReply(e.target.value);

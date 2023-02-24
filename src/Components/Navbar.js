@@ -6,12 +6,13 @@ import { useContext } from 'react';
 import UserContext from '../context/User/UserContext';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function Navbar() {
 
   const [cookies , setCookies] = useCookies();
   const {user , getuser} = useContext(UserContext);
+  let loggeduser = JSON.parse( localStorage.getItem('user'))
 
   const handleLogout = async (e) => {
    
@@ -20,9 +21,9 @@ function Navbar() {
       .then((res) => {
         document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
         toast.success(`Logged out`);
+        localStorage.removeItem('user');
       })
       .catch((err) => {
-        toast.success(`Enter correct credentail`);
         console.log(err);
       });
   }
@@ -44,12 +45,19 @@ function Navbar() {
                 <li> <a href="/" className="active"> Home </a> </li>
                 <li> <a href="/about"> About </a> </li>
                 <li> <a href="/contact"> Contact </a>  </li>
-                <li><a href="#"> help </a> </li>
+                <li> <a href="/createDonation"> Request </a> </li>
+                <li><a href="/support"> help </a> </li>
             </ul>
 
             <div className="navbar-sign">
 
-            <p> {cookies.token ? `hello ${user.name}!` : ''}</p>
+            {/* <p> {cookies.token ? `hello ${user.name}!` : ''}</p> */}
+
+            { <p> {loggeduser ? `hello ${loggeduser.name}!` : ''}</p> }
+
+            
+
+            {/* {console.log(user)} */}
 
             {cookies.token === undefined ?  
             <a href='/signin' className='sign-btn' > sign Up <i className="fa-solid fa-right-to-bracket"></i>  </a> : 

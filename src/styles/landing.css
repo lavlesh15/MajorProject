@@ -69,12 +69,19 @@ button a
 {
     color:white;
     text-decoration: none;
+    display: block;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
 
 button a:hover
 {
     color: #6674cc;
 }
+
 
 button:hover
 {

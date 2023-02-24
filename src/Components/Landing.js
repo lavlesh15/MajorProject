@@ -12,7 +12,7 @@ import { useCookies } from 'react-cookie';
 function Landing() {
 
   const [cookies , setCookies] = useCookies();
-//   const {user , getuser} = useContext(UserContext);
+  const {user , getuser} = useContext(UserContext);
 
 //   useEffect(()=>{
 //     if(cookies.token)

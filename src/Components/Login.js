@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import "../styles/signin.css";
 import toast, { Toaster } from "react-hot-toast";
 import { useCookies } from "react-cookie";
-import { useNavigate } from "react-router-dom";
+import { json, useNavigate } from "react-router-dom";
 import axios from "axios";
 import UserContext from "../context/User/UserContext";
 
@@ -11,7 +11,7 @@ function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies();
-  const {user , getuser} = useContext(UserContext);
+  const {user , setUser , getuser} = useContext(UserContext);
 
 
   const handleSubmit = (e) => {
@@ -35,8 +35,11 @@ function Login() {
         if (res.data.success === "true") {
           setCookie("token", res.data.token);
           toast.success(`${res.data.user.name}! Logged in`);
-          console.log(res.data);
-          getuser();
+          console.log(res.data.user);
+          setUser(res.data.user);
+          let userstring = JSON.stringify(res.data.user);
+          localStorage.setItem("user", userstring);
+          // getuser();
           navigate("/");
           // console.log(res.data);
         } else {

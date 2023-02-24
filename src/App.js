@@ -8,11 +8,12 @@ import SignIn from "./Components/SignIn.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./Components/Login.js";
-import { Toaster } from "react-hot-toast";
+import { toast, Toaster } from "react-hot-toast";
 import UserState from "./context/User/UserState.js";
 import CreateDonation from "./Components/CreateDonation.js";
 import Donate from "./Components/Donate.js";
 import Support from "./Components/Support.js";
+import PageNotFound from "./Components/PageNotFound.js";
 
 
 function App() {
@@ -22,6 +23,8 @@ function App() {
     integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
     crossorigin="anonymous"
   />;
+
+  let loggeduser = JSON.parse( localStorage.getItem('user'))
 
   return (
     <>
@@ -47,7 +50,7 @@ function App() {
             }}
           />
           <Navbar />
-
+                   
           <Router>
             <Routes>
               <Route exact path="/" element={<Landing />}></Route>
@@ -55,9 +58,9 @@ function App() {
               <Route exact path="/contact" element={<Contact />}></Route>
               <Route exact path="/signin" element={<SignIn />}></Route>
               <Route exact path="/login" element={<Login />}></Route>
-              <Route exact path="/createDonation" element={<CreateDonation />}></Route>
-              <Route exact path="/donate" element={<Donate />}></Route>
-              <Route exact path="/support" element={<Support />}></Route>
+              <Route exact path="/createDonation" element={loggeduser ? <CreateDonation /> : <PageNotFound/>}></Route>
+              <Route exact path="/donate" element={loggeduser ? <Donate /> : <PageNotFound/>}></Route> 
+              <Route exact path="/support" element={loggeduser ? <Support /> : <PageNotFound/>}></Route> 
             </Routes>
           </Router>
 

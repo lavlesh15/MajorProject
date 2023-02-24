@@ -7,14 +7,12 @@ const UserState = (props) => {
   const [user, setUser] = useState({});
   const [cookies, setCookies] = useCookies();
 
-  
+  const headers = {
+    "Content-Type": "application/json",
+    'token': cookies.token,
+  };
 
   const getuser = async () => {
-
-    const headers = {
-      "Content-Type": "application/json",
-      'token': cookies.token,
-    };
 
     const res = await axios.get("http://localhost:4000/api/profile", {
       headers,
