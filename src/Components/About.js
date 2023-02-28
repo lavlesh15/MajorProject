@@ -41,7 +41,7 @@ function About() {
 
       <div className="team-detail">
         <div className="detail-upper">
-          <h2> Team Guide : prof Suchita Walke </h2>
+          <h2> Team Guide : Prof. Suchita Walke </h2>
         </div>
         <div className="cards-container">
           <Card imgurl={photo1} name="Lavlesh Singh" />

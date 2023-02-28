@@ -46,7 +46,7 @@ function Navbar() {
                 <li> <a href="/about"> About </a> </li>
                 <li> <a href="/contact"> Contact </a>  </li>
                 <li> <a href="/createDonation"> Request </a> </li>
-                <li><a href="/support"> help </a> </li>
+                <li><a href="/support"> Help </a> </li>
             </ul>
 
             <div className="navbar-sign">
