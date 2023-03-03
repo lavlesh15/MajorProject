@@ -38,7 +38,7 @@ function Login() {
           console.log(res.data.user);
           setUser(res.data.user);
           let userstring = JSON.stringify(res.data.user);
-          localStorage.setItem("user", userstring);
+          sessionStorage.setItem("user", userstring);
           // getuser();
           navigate("/");
           // console.log(res.data);

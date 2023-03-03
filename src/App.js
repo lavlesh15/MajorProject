@@ -24,7 +24,7 @@ function App() {
     crossorigin="anonymous"
   />;
 
-  let loggeduser = JSON.parse( localStorage.getItem('user'))
+  let loggeduser = JSON.parse( sessionStorage.getItem('user'))
 
   return (
     <>
@@ -65,8 +65,9 @@ function App() {
           </Router>
 
           <div className="float-div">
-            <a href="tel:+917738649525">
-              <i className="fa-solid fa-phone"></i>
+            <a href="/contact">
+              {/* <i className="fa-solid fa-phone"></i> */}
+              <img src="https://downloads.intercomcdn.com/i/o/299002/b731a3f930a9ad910c9ee7e9/1a269b2104beaaafeea6644490b1e6eb.png" alt="" />
             </a>
           </div>
 

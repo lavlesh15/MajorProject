@@ -13,6 +13,8 @@ function Landing() {
 
   const [cookies , setCookies] = useCookies();
   const {user , getuser} = useContext(UserContext);
+  let loggeduser = JSON.parse(sessionStorage.getItem("user"));
+  let role = loggeduser ? loggeduser.role : '';
 
 //   useEffect(()=>{
 //     if(cookies.token)
@@ -35,7 +37,9 @@ function Landing() {
             </p>
 
             <div className="landing-btn">
-                <button className="donate-btn"> <a href='/donate'> Donate </a></button> 
+                <button className="donate-btn"> <a href={role !== 'organisation' ? '/Donate' : '/createDonation'}>
+                   { role !== 'organisation' ? 'Donate' : 'Create Donation'} </a>
+                   </button> 
                 <button className='btn-more'>Know More</button>
             </div>
         </div>

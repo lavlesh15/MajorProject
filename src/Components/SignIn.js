@@ -20,7 +20,7 @@ function SignIn() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!name || !contact || !email || !password) {
+    if (!name || !contact || !email || !password || !role) {
       toast.success("Enter all field value");
       return;
     }
@@ -36,11 +36,13 @@ function SignIn() {
         contact,
         email,
         password,
+        role
       })
       .then((res) => {
         setCookie("token", res.data.token);
         toast.success(`Hello ${res.data.createdUser.name}! Welcome`);
-        getuser();
+        sessionStorage.setItem('user' , JSON.stringify(res.data.createdUser));
+        // getuser();
         navigate("/");
         
       })
@@ -80,6 +82,13 @@ function SignIn() {
                 required
                 onChange={(e) => setEmail(e.target.value)}
               />
+
+              <select name="role" required onChange={(e) => setRole(e.target.value)}>
+                <option>Select Role</option>
+                <option value="user">User</option>
+                <option value="organisation">Organisation</option>
+              </select>
+
               <input
                 type="password"
                 name="password"

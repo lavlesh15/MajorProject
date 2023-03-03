@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import "../styles/donate.css";
 import DonateCard from "./DonateCard";
+import UserDonation from "./UserDonation";
 
 function Donate() {
   const Donations = [
@@ -56,45 +57,55 @@ function Donate() {
   const [Donatelist, setDonateList] = useState([{}]);
 
   const getList = () => {
-    const res = axios
+    axios
       .get("http://localhost:4000/api/donations")
       .then((res) => setDonateList(res.data.data))
       .catch((err) => console.log(err.message));
   };
 
-  useEffect(()=> {
-      getList();
-  },[])
+  let user = JSON.parse( sessionStorage.getItem('user'))
+
+  useEffect(() => {
+    getList();
+  }, []);
 
   return (
-    <div className="donate-main">
-      <div className="donate-header">
-        <h2>Reqested Donation Camp</h2>
-      </div>
-      <div className="donate-content">
-        {Donatelist.map((item) => {
-          return (
-            <>
-            {/* {!item.isProcessed && <DonateCard */}
-            {<DonateCard
-              key={item._id}
-              id={item._id}
-              name={item.organisation}
-              phone={item.phone}
-              email={item.email}
-              desc={item.description}
-              posterUrl={item.posterUrl}
-              documentUrl={item.documentUrl}
-              cause={item.cause}
-              detail={item.detail}
-              isApproved={item.isApproved}
-            />
-            }
-            </>
-          );
-        })}
-      </div>
-    </div>
+    <>
+      {user.role === "admin" && (
+        <div className="donate-main">
+          <div className="donate-header">
+            <h2>Reqested Donation Camp</h2>
+          </div>
+          <div className="donate-content">
+            {Donatelist.map((item) => {
+              return (
+                <>
+                  {/* {!item.isProcessed && <DonateCard */}
+                  {
+                    <DonateCard
+                      key={item._id}
+                      id={item._id}
+                      name={item.organisation}
+                      phone={item.phone}
+                      email={item.email}
+                      desc={item.description}
+                      posterUrl={item.posterUrl}
+                      documentUrl={item.documentUrl}
+                      cause={item.cause}
+                      detail={item.detail}
+                      isApproved={item.isApproved}
+                    />
+                  }
+                </>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {user.role === "user" && <UserDonation donationcamp = {Donatelist} />}
+      
+    </>
   );
 }
 

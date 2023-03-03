@@ -435,7 +435,7 @@ div .footer-div
   display: block;
   border: 1px solid white;
   box-shadow: 1px 1px 5px gray;
-  background-color: whitesmoke;
+  background-color:#4b5ed4;
   position: fixed;
   bottom: 7%;
   right: 2%;
@@ -453,7 +453,13 @@ div .footer-div
   color:#6674cc;
 }
 
-.float-div a:hover
+.float-div a img
 {
-  color: goldenrod;
+  width: 65%;
+  object-fit: contain;
+}
+
+.float-div:hover
+{
+  background-color: #24307c;
 }

@@ -8,7 +8,6 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import { Navigate } from "react-router-dom";
 
-
 const style = {
   position: "fixed",
   top: "50%",
@@ -38,22 +37,31 @@ function DonateCard({
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  let user = JSON.parse( sessionStorage.getItem('user'))
+
 
   const handleApprove = async () => {
-
     const res = await axios
       .put(`http://localhost:4000/api/donation/${id}`)
       .then((res) => {
         setOpen(false);
-        toast.success(`${name} Application Approved.`)
+        toast.success(`${name} Application Approved.`);
         console.log(res.data);
       })
       .catch((error) => {
         console.log(error);
       });
 
-      Navigate('/Donate');
+    Navigate("/Donate");
   };
+
+  const handleReject = () => {
+    toast.success(`${name} Application Rejected`)
+  }
+
+  const handleDonate = () => {
+    alert('Redirecting to Donation page');
+  }
 
   return (
     <div className="donate-card-main">
@@ -121,12 +129,27 @@ function DonateCard({
                 </ul>
               </div>
               <div className="lower-accept-btn">
-                <div className="lower-btns">
-                  <button onClick={handleApprove} className="approve">
-                    Approve
-                  </button>
-                  <button className="reject">Reject</button>
-                </div>
+                {user.role === "admin" && (
+                  <>
+                  
+                    <div className="lower-btns">
+                    <button onClick={handleApprove} className="approve">
+                      Approve
+                    </button>
+                    <button onClick={handleReject} className="reject">Reject</button>
+                   </div>
+                  </>
+                )}
+
+                {user.role === "user" && (
+                  <>
+                    <div className="lower-btns">
+                    <button onClick={handleDonate} className="approve">
+                      Donate
+                    </button>
+                  </div>
+                  </>
+                )}
               </div>
             </div>
           </div>

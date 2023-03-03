@@ -1,6 +1,6 @@
 .signin-div
 {
-    height: 32rem;
+    height: 35rem;
     margin: auto auto;
     margin-top: 9rem;
     width: 80vw;
@@ -57,10 +57,22 @@
     border-radius: 5px;
 }
 
-.signin-left-lower input:focus
+.signin-left-lower input:focus , 
+.signin-left-lower select :focus
 {
     outline: none;
     box-shadow: 1px 1px 5px gray;
+}
+
+.signin-left-lower select
+{
+    margin-bottom: 1.4rem;
+    width: 50%;
+    color: rgb(116, 110, 110);
+    font-size: 1.1em;
+    padding: .5em .6em;
+    border: 1px solid rgb(168, 165, 165);
+    border-radius: 5px;
 }
 
 .signin-left-lower button
@@ -111,6 +123,6 @@
 
 .signin-right img
 {
-    height: 85%;
+    width: 80%;
     object-fit: contain;
 }
