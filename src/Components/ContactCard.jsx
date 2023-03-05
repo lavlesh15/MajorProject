@@ -84,6 +84,8 @@ function ContactCard({ name, email, phone, subject, message, isProcessed }) {
 
             <form onSubmit={handleSubmit}>
               <div className="contactmodal-form">
+
+
                 <h2> Reply </h2>
                 <div className="contactmodal-div1">
                   <label htmlFor="to"> To : </label>
