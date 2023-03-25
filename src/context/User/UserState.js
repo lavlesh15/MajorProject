@@ -4,7 +4,9 @@ import { useCookies } from "react-cookie";
 import { useState } from "react";
 
 const UserState = (props) => {
-  const [user, setUser] = useState({});
+
+  let loggeduser = JSON.parse(sessionStorage.getItem('user'));
+  const [user, setUser] = useState(loggeduser);
   const [cookies, setCookies] = useCookies();
 
   const headers = {
@@ -16,16 +18,14 @@ const UserState = (props) => {
 
     const res = await axios.get("http://localhost:4000/api/profile", {
       headers,
-    });
-
-    res.then((res) => {
+    }).then((res) => {
       setUser(res.data.user);
-      console.log(res);
+      console.log(res.data.user)
     })
     .catch((err)=>{
       console.log(err.message);
     })
-    // console.log(res)
+    
   };
 
   return (

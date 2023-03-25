@@ -16,12 +16,12 @@ function Landing() {
   let loggeduser = JSON.parse(sessionStorage.getItem("user"));
   let role = loggeduser ? loggeduser.role : '';
 
-//   useEffect(()=>{
-//     if(cookies.token)
-//     {
-//       getuser();
-//     }
-// }, [cookies.token])
+  useEffect(()=>{
+    if(cookies.token)
+    {
+      getuser();
+    }
+}, [cookies.token])
 
   return (
 

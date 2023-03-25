@@ -79,9 +79,9 @@ function CreateDonation() {
     const posterUrl = urls[0];
     const documentUrl = urls[1];
 
-    console.log(`${organisation}--${phone}--${email}--${description}--${cause}--${detail}`)
-    console.log(`${posterUrl}`)
-    console.log(`${documentUrl}`)
+    // console.log(`${organisation}--${phone}--${email}--${description}--${cause}--${detail}`)
+    // console.log(`${posterUrl}`)
+    // console.log(`${documentUrl}`)
 
 
     const res = axios.post('http://localhost:4000/api/createDonation', {
@@ -98,7 +98,7 @@ function CreateDonation() {
     }).then((res) => {
         if(res.data.success)
         {
-          console.log(res);
+          // console.log(res);
           toast.success('Created Succesfully');
         }
         else
